@@ -109,5 +109,4 @@ function closeModalOnEscape({ code }) {
   if (code === "Escape" && isShowed === true) {
     instance.close();
   }
-  console.log("Нажата клавиша Escape");
 }
