@@ -46,8 +46,6 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-let instance;
-let isShowed = false;
 
 // !Элемент списка галереи
 const galleryEl = document.querySelector(".gallery");
@@ -71,6 +69,9 @@ for (let image of images) {
 }
 galleryEl.innerHTML = markupAll;
 
+let isShowed = false;
+let instance;
+
 // !Функция для создания модального окна с изображением
 function createModal(source) {
   // !Разметка модального окна
@@ -84,9 +85,11 @@ function createModal(source) {
   instance = basicLightbox.create(markupModal, {
     onShow: (instance) => {
       isShowed = true;
+      document.addEventListener("keydown", closeModalOnEscape);
     },
     onClose: (instance) => {
       isShowed = false;
+      document.removeEventListener("keydown", closeModalOnEscape);
     },
     closable: true,
   });
@@ -96,15 +99,15 @@ function createModal(source) {
 // !Обработчик клика на элементе галереи
 galleryEl.addEventListener("click", (event) => {
   event.preventDefault();
-  if (event.target.nodeName !== "IMG") {
+  if (event.target === event.currentTarget) {
     return;
   }
   createModal(event.target.dataset.source);
 });
 
-// !Обработчик нажатия клавиши Escape для закрытия модального окна
-document.addEventListener("keydown", (event) => {
-  if (event.code === "Escape" && isShowed === true) {
+function closeModalOnEscape({ code }) {
+  if (code === "Escape" && isShowed === true) {
     instance.close();
   }
-});
+  console.log("Нажата клавиша Escape");
+}
