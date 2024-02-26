@@ -72,7 +72,6 @@ let instance;
 // !Функция для создания модального окна с изображением
 function createModal(source, alt) {
   // !Разметка модального окна
-  // Разметка модального окна
   const markupModal = `
   <div class="modal">
     <img src="${source}" alt="${alt}" width="1112" height="640">
