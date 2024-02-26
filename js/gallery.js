@@ -51,47 +51,41 @@ const images = [
 const galleryEl = document.querySelector(".gallery");
 
 // !Функция для создания разметки элемента галереи
-function createMarkup({ preview, original, description }) {
-  const markup = `
+function createMarkup(arr) {
+  return arr
+    .map(
+      ({ preview, original, description }) => `
     <li class="gallery-item">
       <a class="gallery-link" href="${original}">
         <img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}">
       </a>
-    </li>`;
-  return markup;
+    </li>`
+    )
+    .join("");
 }
 
-// !Создание всей разметки галереи
-let markupAll = "";
-
-for (let image of images) {
-  markupAll += createMarkup(image);
-}
-galleryEl.innerHTML = markupAll;
+galleryEl.innerHTML = createMarkup(images);
 
 let isShowed = false;
 let instance;
 
 // !Функция для создания модального окна с изображением
-function createModal(source) {
+function createModal(source, alt) {
   // !Разметка модального окна
   // Разметка модального окна
   const markupModal = `
   <div class="modal">
-    <img src="${source}" width="1112" height="640">
+    <img src="${source}" alt="${alt}" width="1112" height="640">
   </div>`;
 
   // !Создание модального окна с помощью библиотеки basicLightbox
   instance = basicLightbox.create(markupModal, {
-    onShow: (instance) => {
-      isShowed = true;
+    onShow: () => {
       document.addEventListener("keydown", closeModalOnEscape);
     },
-    onClose: (instance) => {
-      isShowed = false;
+    onClose: () => {
       document.removeEventListener("keydown", closeModalOnEscape);
     },
-    closable: true,
   });
   instance.show(); // !Отображение модального окна
 }
@@ -99,14 +93,12 @@ function createModal(source) {
 // !Обработчик клика на элементе галереи
 galleryEl.addEventListener("click", (event) => {
   event.preventDefault();
-  if (event.target === event.currentTarget) {
-    return;
-  }
-  createModal(event.target.dataset.source);
+  if (event.target.nodeName !== "IMG") return;
+
+  createModal(event.target.dataset.source, event.target.alt);
 });
 
 function closeModalOnEscape({ code }) {
-  if (code === "Escape" && isShowed === true) {
-    instance.close();
-  }
+  if (code !== "Escape") return;
+  instance.close();
 }
