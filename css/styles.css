@@ -1,41 +1,44 @@
 ul,
 ol {
-  margin: 0;
-  padding: 0;
+  margin: 0; /* Убираем внешние отступы */
+  padding: 0; /* Убираем внутренние отступы */
 }
+
 .gallery {
-  display: flex;
-  padding: 24px 156px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  row-gap: 24px;
-  background: #fff;
+  display: flex; /* Отображение в виде флекс-контейнера */
+  padding: 24px 156px; /* Внутренний отступ */
+  flex-wrap: wrap; /* Разрешение переноса элементов на новую строку */
+  justify-content: center; /* Выравнивание контента по центру */
+  align-items: flex-start; /* Выравнивание по верхнему краю */
+  row-gap: 24px; /* Расстояние между строками */
+  background: #fff; /* Фоновый цвет галереи */
 }
+
 .gallery-item {
-  list-style-type: none;
-  width: calc((100% - 2 * 24px) / 3);
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
+  list-style-type: none; /* Убираем маркеры списка */
+  width: calc((100% - 2 * 24px) / 3); /* Ширина элемента галереи */
+  display: flex; /* Отображение в виде флекс-контейнера */
+  flex-shrink: 0; /* Запрещаем сжатие элемента */
+  justify-content: center; /* Выравнивание контента по центру */
 }
+
 .gallery-link {
-  text-decoration: none;
-  display: inline-block;
+  text-decoration: none; /* Убираем подчеркивание */
+  display: inline-block; /* Отображаем элемент как блочный */
 }
 
 .gallery-link:hover {
-  cursor: zoom-in;
+  cursor: zoom-in; /* Изменяем курсор при наведении */
 }
 
 .gallery-image {
-  width: 360px;
-  height: 200px;
-  display: flex;
+  width: 360px; /* Ширина изображения */
+  height: 200px; /* Высота изображения */
+  display: flex; /* Отображение в виде флекс-контейнера */
 }
 
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex; /* Отображение в виде флекс-контейнера */
+  justify-content: center; /* Выравнивание контента по центру */
+  align-items: center; /* Выравнивание по вертикали */
 }
